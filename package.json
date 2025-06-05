@@ -1,0 +1,39 @@
+{
+  "name": "@linyixian/node-red-contrib-aitrios-put-in",
+  "version": "0.0.2",
+  "description": "Nodes that receive data from Aitrios edge devices",
+  "keywords": [
+    "node-red",
+    "aitrios"
+  ],
+  "homepage": "https://github.com/linyixian/node-red-contrib-aitrios-put-in#readme",
+  "bugs": {
+    "url": "https://github.com/linyixian/node-red-contrib-aitrios-put-in/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linyixian/node-red-contrib-aitrios-put-in.git"
+  },
+  "license": "Apache-2.0",
+  "author": "linyixian",
+  "type": "commonjs",
+  "main": "aitrios-put-in.js",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "content-type": "^1.0.5",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "is-utf8": "^0.2.1",
+    "media-typer": "^1.1.0",
+    "on-headers": "^1.0.2",
+    "raw-body": "^2.5.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "node-red": {
+    "nodes": {
+      "aitrios-put-in": "aitrios-put-in.js"
+    }
+  }
+}

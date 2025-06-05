@@ -1,0 +1,45 @@
+[
+    {
+        "id": "e9b3dbe486789629",
+        "type": "http response",
+        "z": "3be3fb34d14cae3d",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 400,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "7ec949981635e88d",
+        "type": "image",
+        "z": "3be3fb34d14cae3d",
+        "name": "",
+        "width": 160,
+        "data": "payload",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 420,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "eff8d2ec988a8428",
+        "type": "aitrios-put-in",
+        "z": "3be3fb34d14cae3d",
+        "name": "",
+        "url": "/image/:filename",
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 180,
+        "wires": [
+            [
+                "7ec949981635e88d",
+                "e9b3dbe486789629"
+            ]
+        ]
+    }
+]

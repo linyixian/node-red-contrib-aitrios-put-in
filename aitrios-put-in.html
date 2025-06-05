@@ -1,0 +1,95 @@
+<script type="text/html" data-template-name="aitrios-put-in"> <div class="form-row">
+    <label><i class="fa fa-tasks"></i> <span data-i18n="httpin.label.method"></span></label>
+    <span style="padding: 6px; display: inline-block;">PUT</span>
+</div>
+<div class="form-row">
+    <label for="node-input-url"><i class="fa fa-globe"></i> <span data-i18n="httpin.label.url"></span></label>
+    <input id="node-input-url" type="text" placeholder="/url">
+</div>
+<div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="common.label.name"></span></label>
+    <input type="text" id="node-input-name" data-i18n="[placeholder]common.label.name">
+</div>
+<div class="form-row row-swagger-doc">
+    <label for="node-input-swaggerDoc"><i class="fa fa-file-text-o"></i> <span data-i18n="httpin.label.doc"></span></label>
+    <input type="text" id="node-input-swaggerDoc">
+</div>
+<div id="node-input-tip" class="form-tips"><span data-i18n="httpin.tip.in"></span><code><span id="node-input-path"></span></code>.</div>
+</script>
+
+<script type="text/javascript">
+(function() {
+RED.nodes.registerType('aitrios-put-in',{ // Changed node type name
+    category: 'network',
+    color:"#A6BBCF",
+    defaults: {
+        name: {value:"", label: RED._("common.label.name")},
+        url: {value:"", required:true, label: RED._("httpin.label.url"), validate: function(v) {
+            if (!v) {
+                return RED._("httpin.errors.missing-path");
+            }
+            return true;
+        }},
+        swaggerDoc: {type:"swagger-doc", required:false, label: RED._("httpin.label.doc")}
+    },
+    inputs:0,
+    outputs:1,
+    icon: "font-awesome/fa-arrow-circle-o-up",
+    align: "right",
+    help: "このノードはAITRIOSデバイスからのPUTリクエストを受け付けます。\n" +
+          "入力として画像データ（JPEG、BMP）やテキストデータを処理できます。\n" +
+          "出力メッセージには以下のプロパティが含まれます：\n" +
+          "- req: リクエストオブジェクト（ヘッダー情報を含む）\n" +
+          "- res: レスポンスオブジェクト\n" +
+          "- payload: リクエストボディの内容\n\n" +
+          "設定項目：\n" +
+          "- URL: エンドポイントのパス（例: /aitrios/put）\n" +
+          "- Swagger Doc: API仕様書のパス（オプション）\n\n" +
+          "--- English ---\n" +
+          "This node accepts PUT requests from AITRIOS devices.\n" +
+          "It can process image data (JPEG, BMP) and text data as input.\n" +
+          "The output message contains the following properties:\n" +
+          "- req: Request object (including header information)\n" +
+          "- res: Response object\n" +
+          "- payload: Request body content\n\n" +
+          "Configuration:\n" +
+          "- URL: Endpoint path (e.g., /aitrios/put)\n" +
+          "- Swagger Doc: Path to API specification (optional)",
+    label: function() {
+        if (this.name) {
+            return this.name;
+        } else if (this.url) {
+            var root = RED.settings.httpNodeRoot || "";
+            if (root.endsWith && root.slice(-1) === "/") {
+                root = root.slice(0,-1);
+            }
+            var url = this.url;
+            if (url.charAt(0) !== '/') {
+                url = '/' + url;
+            }
+            return "[PUT] "+ (root?root:"") + url;
+        } else {
+            return "aitrios put in"; // Changed default label
+        }
+    },
+    labelStyle: function() {
+        return this.name?"node_label_italic":"";
+    },
+    oneditprepare: function() {
+        var root = RED.settings.httpNodeRoot || "";
+        if (root.endsWith && root.slice(-1) === "/") {
+            root = root.slice(0,-1);
+        }
+        if (root === "") {
+            $("#node-input-tip").hide();
+        } else {
+            $("#node-input-path").html(root);
+            $("#node-input-tip").show();
+        }
+        if(!RED.nodes.getType("swagger-doc")){
+            $('.row-swagger-doc').hide();
+        }
+    }
+});
+})();
+</script>
