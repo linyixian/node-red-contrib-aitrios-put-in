@@ -1,6 +1,6 @@
 {
   "name": "@linyixian/node-red-contrib-aitrios-put-in",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Nodes that receive data from Aitrios edge devices",
   "keywords": [
     "node-red",
