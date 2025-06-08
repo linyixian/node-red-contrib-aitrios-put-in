@@ -35,5 +35,14 @@
     "nodes": {
       "aitrios-put-in": "aitrios-put-in.js"
     }
+  },
+  "scripts": {
+    "test": "mocha \"test/**/*_spec.js\""
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0",
+    "node-red": "^4.0.9",
+    "node-red-node-test-helper": "^0.3.4",
+    "should": "^13.2.3"
   }
 }
